@@ -5,3 +5,16 @@
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
 }
+#header a{
+    color: #858585;
+    cursor: pointer;
+    font-size: 16px;
+}
+#header a:hover{
+    color: #5D5FEF;
+}
+#item h1{
+    font-size: 25px;
+    color: gray;
+    font-weight: 600;
+}
