@@ -49,22 +49,37 @@
     </div>
 
 <!-- blog -->
-    <div class="container">
-      <section class="blog">
-        <h1>1. Different between var , let and const?</h1>
-        <p>Ans: var: 
-          - hoisted (always declared at top of scope, global if none)
-          - function scope
-      let:
-          - block scope
-          - not redeclarable
-      const: 
-          - block scope
-          - not reassignable
-          - not redeclarable</p>
-          <h1>2. Different between arrow function and regular function?</h1>
-          <p>Ans: 'Regular functions are constructible, they can be called using the new keyword. However, the arrow functions are only callable and not constructible, i.e arrow functions can never be used as constructor functions.'</p>
+    <div class="container mt-4">
+      <section id="blogSection" class="d-none">
+        <h1 class="text-center my-3">JavaScript Qustions</h1>
+        <h1 style="font-size: 25px; color:black;" class="mt-3">1. Different between var , let and const?</h1>
+        <p class="mt-3"><b>Ans:</b> <b>var: </b>hoisted (always declared at top of scope, global if none) function scope <br>
+          <b> let:</b> block scope - not redeclarable
+          <br>
+          <b>const: </b>block scope- not reassignable- not redeclarable</p>
+
+          <h1 style="font-size: 25px; color:black;" class="mt-3">2. Different between arrow function and regular function?</h1>
+          <p class="mt-3"><b>Ans:</b> Regular functions are constructible, they can be called using the new keyword. However, the arrow functions are only callable and not constructible, i.e arrow functions can never be used as constructor functions.</p>
+
+          <h1 style="font-size: 25px; color:black;" class="mt-3">2. Why using template string?</h1>
+          <p class="mt-3"><b>Ans:</b> Template literals provide an easy way to interpolate variables and expressions into strings. The method is called string interpolation.</p>
+
+          <h1 style="font-size: 25px; color:black;" class="mt-3">3. Different between map, forEach, filter, find?</h1>
+          <p class="mt-3"><b>Ans:</b> <b>forEach:</b>
+            Foreach takes a callback function and run that callback function on each element of array one by one. <br>
+           <b>filter:</b>
+           The main difference between forEach and filter is that forEach just loop over the array and executes the callback but filter executes the callback and check its return value. <br>
+           <b> map:</b>
+           Map like filter & foreach takes a callback and run it against every element on the array but whats makes it unique is it generate a new array based on your existing array. <br>
+           <b>find:</b>
+           The find() method is used to find all the descendant elements of the selected element. </p>
       </section>
+    </div>
+    <!-- spinner -->
+    <div class="d-flex justify-content-center d-none" id="spinner">
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
     </div>
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

@@ -19,11 +19,14 @@ const loadCategories = () => {
 loadCategories();
 const item = document.getElementById('item');
 const main = document.getElementById('main');
+const blogSection = document.getElementById('blogSection')
 const showNews = (news, name) => {
+    toggleSpinner(true)
     item.style.display = 'block';
     main.style.display = 'block';
     main.innerHTML = '';
     item.innerHTML = '';
+    blogSection.classList.add('d-none')
     const h1 = document.createElement('h1');
     h1.style.display = 'block'
     fetch(`https://openapi.programming-hero.com/api/news/category/${news}`)
@@ -38,7 +41,7 @@ const showNews = (news, name) => {
             const result = view.sort((a, b) => {
                 return b.total_view - a.total_view;
             })
-                result.forEach(data => {
+            result.forEach(data => {
                     const div = document.createElement('div');
                     div.classList.add('main');
                     div.innerHTML = `
@@ -82,10 +85,12 @@ const showNews = (news, name) => {
                 </div>
                     `;
                     main.appendChild(div)
-                    main.classList.remove('d-none')
+                main.classList.remove('d-none')
+                
                 })
 
 
+                toggleSpinner(false);
   
 
             if (allNews.length !== 0 && h1.innerText === '') {
@@ -102,11 +107,11 @@ const showNews = (news, name) => {
                 item.appendChild(h1)
             }
         })
-        .catch (err=>console.log(err))
+        .catch(err => console.log(err))
     
 };
 
-
+// -----------modal================
 const showModal = (newsId) => {
     const modalBody = document.getElementById('modalBody');
     fetch(`https://openapi.programming-hero.com/api/news/${newsId}`)
@@ -133,46 +138,24 @@ const showModal = (newsId) => {
         })
         .catch (err=>console.log(err))
 }
+
+// ==============blog=====================
 const blog = document.getElementById('blog')
 blog.addEventListener('click', () => {
     item.style.display = 'none';
     main.style.display = 'none';
+    blogSection.classList.remove('d-none')
 
 })
 
+// spinner===================
+const spinner = document.getElementById('spinner');
+const toggleSpinner = isLoading => {
+    if (isLoading) {
+        spinner.classList.remove('d-none');
+    }
 
-const qustion = {
-    qus1 : {
-        qus: 'Different between var , let and const?',
-        ans:` var: 
-        - hoisted (always declared at top of scope, global if none)
-        - function scope
-    let:
-        - block scope
-        - not redeclarable
-    const: 
-        - block scope
-        - not reassignable
-        - not redeclarable`
-    },
-    qus2: {
-        qus: 'Different between arrow function and regular function?',
-        ans: 'Regular functions are constructible, they can be called using the new keyword. However, the arrow functions are only callable and not constructible, i.e arrow functions can never be used as constructor functions.'
-    },
-    qus3: {
-        qus: 'Different between map, forEach, filter, find?',
-        ans: `forEach:
-         Foreach takes a callback function and run that callback function on each element of array one by one.
-        filter:
-        The main difference between forEach and filter is that forEach just loop over the array and executes the callback but filter executes the callback and check its return value. 
-        map:
-        Map like filter & foreach takes a callback and run it against every element on the array but whats makes it unique is it generate a new array based on your existing array.
-        find:
-        The find() method is used to find all the descendant elements of the selected element. 
-        `
-    },
-    qus4: {
-        qus: 'Why using template string?',
-        ans:'Template literals provide an easy way to interpolate variables and expressions into strings. The method is called string interpolation.'
+    else {
+        spinner.classList.add('d-none')
     }
 }
