@@ -13,7 +13,7 @@
 </head>
 <body style="background-color:#F6F6F6 ;">
     <!-- navbar  -->
-    <nav class="navbar navbar-expand-lg bg-light">
+    <nav class="navbar navbar-expand-lg bg-light border-bottom">
         <div class="container">
           <a style="color:#5D5FEF;" class="navbar-brand" href="#">Online News</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -31,10 +31,13 @@
           </div>
         </div>
     </nav>
-    <header class="container">
-        <section id="header" class="d-flex align-items-center justify-content-between py-3 ">
-        </section>
-    </header>
+    <div class="container-fluid shadow-sm">
+        <header class="container">
+            <section id="header" class="d-flex align-items-center justify-content-between py-3 ">
+            </section>
+        </header>
+    </div>
+
     <div class="container" id="item">
         
     </div>
@@ -45,7 +48,10 @@
         </section>
     </div>
 
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 
+  </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js
     "></script>
     <script src="app.js"></script>

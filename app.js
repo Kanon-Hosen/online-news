@@ -96,9 +96,30 @@ const showNews = async (news, name) => {
 
 
 const showModal = (newsId) => {
+    const modalBody = document.getElementById('modalBody');
+    const staticBackdrop = document.getElementById('staticBackdrop')
     fetch(`https://openapi.programming-hero.com/api/news/${newsId}`)
         .then(res => res.json)
         .then(data => {
-        
+            const modalNews = data.data;
+            modalNews.forEach(modal => {
+                const div = document.createElement('div');
+                modalBody.innerHTML = `
+                <div class="modal-content" >
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"             aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <img src="${modal.image_url}" alt="">
+                        <p></p>
+                    </div>
+                    <div class="modal-footer">
+                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+                `
+                staticBackdrop.appendChild(modalBody)
+            })
     })
 }
