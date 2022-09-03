@@ -29,6 +29,7 @@ const showNews = async (news, name) => {
         .then(data => {
             const allNews = data.data;
             allNews.forEach(news => {
+                console.log(news._id)
                 const div = document.createElement('div');
                 div.classList.add('main');
                 div.innerHTML = `
@@ -49,7 +50,7 @@ const showNews = async (news, name) => {
                                         </div>
                                         <div class="col-8">
                                             <p style="color:#2B2C34; font-weight:500;">${news.author.name ? news.author.name : 'No Found author'}</p>
-                                            <p style="margin-top: -10px; color: #949494;">${news.author.published_date.slice(0, 10) ? news.author.published_date.slice(0, 10) : 'No found'}</p>
+                                            <p style="margin-top: -10px; color: #949494;">${news.author.published_date ? news.author.published_date.slice(0, 10) : 'No found'}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -61,13 +62,10 @@ const showNews = async (news, name) => {
                                     <p>Rating: ${news.rating.number}</p>
                                 </div>
                                 <div class="col-2">
-                                <!-- Button trigger modal -->
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                <i class="fa-solid fa-arrow-right"></i>
+                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="showModal('${news._id}')">
+                                     <i class="fa-solid fa-arrow-right"></i>
                                 </button>
-                                
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -97,17 +95,26 @@ const showNews = async (news, name) => {
 
 const showModal = (newsId) => {
     const modalBody = document.getElementById('modalBody');
-    const staticBackdrop = document.getElementById('staticBackdrop')
     fetch(`https://openapi.programming-hero.com/api/news/${newsId}`)
-        .then(res => res.json)
-        .then(data => {
-            const modalNews = data.data;
+        .then(res => res.json())
+        .then(modalData => {
+            const modalNews = modalData.data;
             modalNews.forEach(modal => {
+                modalBody.innerHTML = ''
+                console.log(modal)
                 const div = document.createElement('div');
-                modalBody.innerHTML = `
-
-                `
-                staticBackdrop.appendChild(modalBody)
+                div.classList.add('modalBody');
+                div.innerHTML = `
+                <h4 style = "color:black; font-size: 20px;">${modal.title}</h4>
+                <div class="img mt-3">
+                  <img class ="img-fluid" src="${modal.image_url}" alt="">
+                </div>
+                <p class ="mt-2 fw-bold">${modal.author.published_date}</p>
+                <div class="text">
+                  <p style="color:#858585" class ="mt-3">${modal.details}</p>
+                </div>
+                `;
+                modalBody.appendChild(div);
             })
     })
 }
