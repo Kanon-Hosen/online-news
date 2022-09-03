@@ -62,7 +62,7 @@ const showNews = async (news, name) => {
                                 </div>
                                 <div class="col-2">
                                 <!-- Button trigger modal -->
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                 <i class="fa-solid fa-arrow-right"></i>
                                 </button>
                                 
@@ -105,19 +105,7 @@ const showModal = (newsId) => {
             modalNews.forEach(modal => {
                 const div = document.createElement('div');
                 modalBody.innerHTML = `
-                <div class="modal-content" >
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"             aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <img src="${modal.image_url}" alt="">
-                        <p></p>
-                    </div>
-                    <div class="modal-footer">
-                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    </div>
-                </div>
+
                 `
                 staticBackdrop.appendChild(modalBody)
             })
