@@ -127,8 +127,23 @@ const showModal = (newsId) => {
                 <div class="img mt-3">
                   <img class ="img-fluid" src="${modal.image_url}" alt="">
                 </div>
-                <p class ="mt-2 fw-bold">Published Date: ${modal.author.published_date ?modal.author.published_date.slice(0,10) : 'no found'}</p>
-                <p class ="mt-2 fw-bold">View: ${modal.total_view ? modal.total_view : 'no found'}</p>
+                <div class = "row mt-3">
+                    <div class="col-8">
+                        <div class = "row d-">
+                            <div class="col-3">
+                            <img class ="img-fluid rounded-circle" src="${modal.author.img}">
+                            </div>
+                            <div class="col-9">
+                            <p  class ="fw-bold">${modal.author.name}</p>
+                            <p style="margin-top:-15px;">${modal.author.published_date ? modal.author.published_date.slice(0,10) : 'no found'}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class ="col-4">
+                        <p class =" fw-bold">View: ${modal.total_view ? modal.total_view : 'no found'}</p>
+                    </div>
+                </div>
+
                 <div class="text">
                   <p style="color:#858585" class ="mt-3">${modal.details}</p>
                 </div>
