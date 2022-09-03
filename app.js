@@ -1,3 +1,10 @@
+const item = document.getElementById('item');
+const main = document.getElementById('main');
+const blogSection = document.getElementById('blogSection')
+const spinner = document.getElementById('spinner');
+const modalBody = document.getElementById('modalBody');
+const blog = document.getElementById('blog')
+
 const loadCategories = () => {
     fetch('https://openapi.programming-hero.com/api/news/categories')
         .then(res => res.json())
@@ -14,12 +21,11 @@ const loadCategories = () => {
                 header.appendChild(div)
             })
         })
-    .catch (err=>console.log(err))
-}
+        .catch(err => console.log(err))
+};
+
 loadCategories();
-const item = document.getElementById('item');
-const main = document.getElementById('main');
-const blogSection = document.getElementById('blogSection')
+
 const showNews = (news, name) => {
     toggleSpinner(true)
     item.style.display = 'block';
@@ -85,7 +91,7 @@ const showNews = (news, name) => {
                 </div>
                     `;
                     main.appendChild(div)
-                main.classList.remove('d-none')
+                    main.classList.remove('d-none')
                 
                 })
 
@@ -113,7 +119,6 @@ const showNews = (news, name) => {
 
 // -----------modal================
 const showModal = (newsId) => {
-    const modalBody = document.getElementById('modalBody');
     fetch(`https://openapi.programming-hero.com/api/news/${newsId}`)
         .then(res => res.json())
         .then(modalData => {
@@ -134,8 +139,8 @@ const showModal = (newsId) => {
                             <img class ="img-fluid rounded-circle" src="${modal.author.img}">
                             </div>
                             <div class="col-9">
-                            <p  class ="fw-bold">${modal.author.name}</p>
-                            <p style="margin-top:-15px;">${modal.author.published_date ? modal.author.published_date.slice(0,10) : 'no found'}</p>
+                            <p  class ="fw-bold">${modal.author.name ? modal.author.name : 'No found'}</p>
+                            <p style="margin-top:-15px;">${modal.author.published_date ? modal.author.published_date.slice(0, 10) : 'no found'}</p>
                             </div>
                         </div>
                     </div>
@@ -151,20 +156,18 @@ const showModal = (newsId) => {
                 modalBody.appendChild(div);
             })
         })
-        .catch (err=>console.log(err))
-}
+        .catch(err => console.log(err))
+};
 
 // ==============blog=====================
-const blog = document.getElementById('blog')
 blog.addEventListener('click', () => {
     item.style.display = 'none';
     main.style.display = 'none';
     blogSection.classList.remove('d-none')
 
-})
+});
 
 // spinner===================
-const spinner = document.getElementById('spinner');
 const toggleSpinner = isLoading => {
     if (isLoading) {
         spinner.classList.remove('d-none');
@@ -173,4 +176,4 @@ const toggleSpinner = isLoading => {
     else {
         spinner.classList.add('d-none')
     }
-}
+};
