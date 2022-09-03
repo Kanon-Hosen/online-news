@@ -19,7 +19,9 @@ const loadCategories = () => {
 loadCategories();
 const item = document.getElementById('item');
 const main = document.getElementById('main');
-const showNews = async (news, name) => {
+const showNews = (news, name) => {
+    item.style.display = 'block';
+    main.style.display = 'block';
     main.innerHTML = '';
     item.innerHTML = '';
     const h1 = document.createElement('h1');
@@ -29,15 +31,14 @@ const showNews = async (news, name) => {
         .then(data => {
             const allNews = data.data;
             const view = []
+
             allNews.forEach(news => {
                 view.push(news)
             });
-
-            const result = view.sort((a , b) => {
+            const result = view.sort((a, b) => {
                 return b.total_view - a.total_view;
             })
                 result.forEach(data => {
-                    console.log(data)
                     const div = document.createElement('div');
                     div.classList.add('main');
                     div.innerHTML = `
@@ -101,6 +102,7 @@ const showNews = async (news, name) => {
                 item.appendChild(h1)
             }
         })
+        .catch (err=>console.log(err))
     
 };
 
@@ -113,7 +115,6 @@ const showModal = (newsId) => {
             const modalNews = modalData.data;
             modalNews.forEach(modal => {
                 modalBody.innerHTML = ''
-                console.log(modal)
                 const div = document.createElement('div');
                 div.classList.add('modalBody');
                 div.innerHTML = `
@@ -121,12 +122,57 @@ const showModal = (newsId) => {
                 <div class="img mt-3">
                   <img class ="img-fluid" src="${modal.image_url}" alt="">
                 </div>
-                <p class ="mt-2 fw-bold">Published Date: ${modal.author.published_date.slice(0,10)}</p>
+                <p class ="mt-2 fw-bold">Published Date: ${modal.author.published_date ?modal.author.published_date.slice(0,10) : 'no found'}</p>
+                <p class ="mt-2 fw-bold">View: ${modal.total_view ? modal.total_view : 'no found'}</p>
                 <div class="text">
                   <p style="color:#858585" class ="mt-3">${modal.details}</p>
                 </div>
                 `;
                 modalBody.appendChild(div);
             })
-    })
+        })
+        .catch (err=>console.log(err))
+}
+const blog = document.getElementById('blog')
+blog.addEventListener('click', () => {
+    item.style.display = 'none';
+    main.style.display = 'none';
+
+})
+
+
+const qustion = {
+    qus1 : {
+        qus: 'Different between var , let and const?',
+        ans:` var: 
+        - hoisted (always declared at top of scope, global if none)
+        - function scope
+    let:
+        - block scope
+        - not redeclarable
+    const: 
+        - block scope
+        - not reassignable
+        - not redeclarable`
+    },
+    qus2: {
+        qus: 'Different between arrow function and regular function?',
+        ans: 'Regular functions are constructible, they can be called using the new keyword. However, the arrow functions are only callable and not constructible, i.e arrow functions can never be used as constructor functions.'
+    },
+    qus3: {
+        qus: 'Different between map, forEach, filter, find?',
+        ans: `forEach:
+         Foreach takes a callback function and run that callback function on each element of array one by one.
+        filter:
+        The main difference between forEach and filter is that forEach just loop over the array and executes the callback but filter executes the callback and check its return value. 
+        map:
+        Map like filter & foreach takes a callback and run it against every element on the array but whats makes it unique is it generate a new array based on your existing array.
+        find:
+        The find() method is used to find all the descendant elements of the selected element. 
+        `
+    },
+    qus4: {
+        qus: 'Why using template string?',
+        ans:'Template literals provide an easy way to interpolate variables and expressions into strings. The method is called string interpolation.'
+    }
 }
